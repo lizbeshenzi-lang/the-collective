@@ -140,6 +140,26 @@ footer{border-top:1px solid var(--border);padding:5rem 4rem 3rem;background:var(
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.58rem;letter-spacing:0.15em;font-family:var(--mono)}
 .footer-reg{color:var(--dim);text-transform:uppercase}
 .footer-lc{font-family:var(--serif);font-style:italic;color:var(--warm);font-size:0.75rem}
+
+/* MOBILE OPTIMIZATIONS */
+@media(max-width: 640px) {
+  html { font-size: 15px; }
+  h1, .hero-h1, .sec-h2 { line-height: 1.2; word-break: break-word; }
+  p { line-height: 1.6; }
+  section { padding: 2rem 1rem !important; }
+  .work-grid, .doctors-grid, .services-list, .about-facts, .cform, .bf-group, .cf { grid-template-columns: 1fr !important; }
+  .cf-2, .bf-2col { grid-template-columns: 1fr !important; gap: 1rem; }
+  button, .btn-gold, .btn-outline-teal, .btn-ghost, .c-submit, .book-btn { width: 100%; padding: 1rem !important; font-size: 1rem; }
+  .hero, .hero-l, .hero-r { grid-template-columns: 1fr !important; padding: 2rem 1rem !important; }
+  nav { padding: 1rem !important; }
+  footer { padding: 2rem 1rem !important; }
+  .fi, .ft, .fbot { grid-template-columns: 1fr !important; gap: 2rem; }
+}
+@media(max-width: 360px) {
+  html { font-size: 14px; }
+  section { padding: 1.5rem 0.75rem !important; }
+  button { font-size: 0.875rem; padding: 0.75rem !important; }
+}
 </style>
 </head>
 <body>
@@ -353,4 +373,5 @@ function showSt(m,c,bg){var e=document.getElementById('fStatus');e.textContent=m
 </script>
 </body>
 </html>
+
 
