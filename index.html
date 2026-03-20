@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Collective — London</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#0c0b09;--near:#131210;--surface:#1c1b18;--border:rgba(255,255,255,0.07);
+  --mid:rgba(255,255,255,0.35);--dim:rgba(255,255,255,0.18);
+  --light:rgba(255,255,255,0.72);--white:rgba(255,255,255,0.93);
+  --accent:#c8b89a;--warm:#8a7a65;
+  --serif:'EB Garamond',Georgia,serif;--mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--white);font-family:var(--mono);font-weight:400;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;border-bottom:1px solid var(--border)}
+.nav-mark{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;color:var(--mid);text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:3rem;align-items:center}
+.nav-links a{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-gather{color:var(--accent)!important;border-bottom:1px solid var(--accent);padding-bottom:0.1rem}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem 4rem 5rem;position:relative;overflow:hidden}
+.hero-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--serif);font-size:clamp(12rem,25vw,22rem);font-weight:400;font-style:italic;
+  color:rgba(255,255,255,0.03);white-space:nowrap;pointer-events:none;line-height:1;
+  letter-spacing:-0.05em;
+}
+.hero-coords{font-size:0.62rem;letter-spacing:0.2em;color:var(--dim);margin-bottom:5rem;font-family:var(--mono)}
+.hero-main{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:flex-end}
+.hero-h1{
+  font-family:var(--serif);font-size:clamp(4rem,7vw,8rem);font-weight:400;font-style:italic;
+  color:var(--white);line-height:0.9;letter-spacing:-0.03em;
+}
+.hero-right{padding-bottom:0.5rem}
+.hero-desc{
+  font-size:0.72rem;font-family:var(--mono);letter-spacing:0.1em;color:var(--mid);
+  line-height:2.2;max-width:26rem;text-transform:uppercase;margin-bottom:3rem;
+}
+.hero-gather{
+  display:inline-flex;align-items:center;gap:1.5rem;
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;transition:all 0.2s;
+}
+.hero-gather:hover{color:var(--white)}
+.hero-gather::after{content:'';width:3rem;height:1px;background:currentColor;transition:width 0.3s}
+.hero-gather:hover::after{width:5rem}
+.hero-scroll-hint{position:absolute;bottom:2.5rem;right:4rem;font-size:0.6rem;letter-spacing:0.25em;color:var(--dim);writing-mode:vertical-rl;font-family:var(--mono);text-transform:uppercase}
+
+/* GATHERING TIMES — RAW TABLE AESTHETIC */
+.times{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--near);overflow:hidden}
+.times-inner{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--border)}
+.time-item{padding:3rem 3.5rem;border-right:1px solid var(--border);position:relative}
+.time-num{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);margin-bottom:2rem;text-transform:uppercase}
+.time-day{font-family:var(--serif);font-size:2rem;font-style:italic;color:var(--accent);line-height:1;margin-bottom:0.5rem}
+.time-clock{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.15em;color:var(--mid);margin-bottom:0.75rem}
+.time-location{font-size:0.65rem;letter-spacing:0.1em;color:var(--dim);line-height:1.8}
+
+/* ABOUT */
+.about{padding:9rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:10rem;align-items:start}
+.about-index{font-size:0.6rem;letter-spacing:0.25em;color:var(--dim);font-family:var(--mono);text-transform:uppercase;margin-bottom:1.5rem}
+.about h2{font-family:var(--serif);font-size:clamp(2.5rem,4vw,4.5rem);font-weight:400;font-style:italic;color:var(--white);line-height:1.1;margin-bottom:0;letter-spacing:-0.02em}
+.about-right{padding-top:4rem}
+.about p{font-size:0.8rem;font-family:var(--mono);color:var(--mid);line-height:2.3;margin-bottom:1.5rem;letter-spacing:0.03em}
+.about-rule{height:1px;background:var(--border);margin:2.5rem 0}
+.about-detail{display:flex;flex-direction:column;gap:1.25rem}
+.detail-row{display:grid;grid-template-columns:7rem 1fr;gap:1rem;font-size:0.65rem;letter-spacing:0.12em;color:var(--dim);font-family:var(--mono)}
+.detail-label{text-transform:uppercase;color:var(--warm)}
+.detail-val{color:var(--mid)}
+
+/* PRACTICES */
+.practices{background:var(--near);padding:9rem 4rem;border-top:1px solid var(--border)}
+.practices-head{display:grid;grid-template-columns:1fr 2fr;gap:8rem;margin-bottom:6rem;align-items:end}
+.practices-head-label{font-size:0.6rem;letter-spacing:0.25em;color:var(--dim);font-family:var(--mono);text-transform:uppercase}
+.practices-head h2{font-family:var(--serif);font-size:clamp(2rem,3vw,3.5rem);font-weight:400;font-style:italic;color:var(--white);line-height:1.1}
+.practices-list{display:flex;flex-direction:column}
+.practice{display:grid;grid-template-columns:5rem 1fr 1fr;gap:3rem;padding:3rem 0;border-top:1px solid var(--border);align-items:start}
+.practice:last-child{border-bottom:1px solid var(--border)}
+.practice-n{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.2em;color:var(--dim)}
+.practice h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;font-style:italic;color:var(--accent);line-height:1.2}
+.practice p{font-size:0.72rem;font-family:var(--mono);color:var(--mid);line-height:2.2;letter-spacing:0.04em}
+
+/* TEACHING */
+.teaching{padding:9rem 4rem;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start}
+.teaching-meta{font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);font-family:var(--mono);text-transform:uppercase;margin-bottom:1.5rem}
+.teaching h2{font-family:var(--serif);font-size:clamp(2rem,3vw,3rem);font-weight:400;font-style:italic;color:var(--white);line-height:1.1;margin-bottom:0.5rem}
+.teaching-series{font-size:0.65rem;letter-spacing:0.15em;color:var(--warm);font-family:var(--mono);margin-bottom:2rem;text-transform:uppercase}
+.teaching p{font-size:0.78rem;font-family:var(--mono);color:var(--mid);line-height:2.2;margin-bottom:2rem;letter-spacing:0.03em}
+.teacher-line{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.teacher-init{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.9rem;font-style:italic;color:var(--accent)}
+.teacher-n{font-size:0.7rem;font-family:var(--mono);color:var(--mid);letter-spacing:0.08em}
+.teacher-r{font-size:0.62rem;font-family:var(--mono);color:var(--dim);letter-spacing:0.06em}
+.listen-link{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);text-decoration:none;font-family:var(--mono);border-bottom:1px solid rgba(200,184,154,0.3);padding-bottom:0.2rem;transition:all 0.2s}
+.listen-link:hover{color:var(--white);border-color:var(--white)}
+.teaching-visual{background:var(--surface);border:1px solid var(--border);height:480px;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem;position:relative;overflow:hidden}
+.teaching-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3;filter:grayscale(60%)}
+.teaching-visual-foot{position:relative;z-index:1}
+.teaching-stamp{font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);font-family:var(--mono);text-transform:uppercase;margin-bottom:0.75rem}
+.teaching-title-sm{font-family:var(--serif);font-size:1.3rem;font-style:italic;color:var(--accent)}
+
+/* PULL QUOTE */
+.pull{padding:9rem 4rem;border-top:1px solid var(--border);text-align:center;position:relative}
+.pull::before{content:'§';font-family:var(--serif);font-size:8rem;color:var(--border);position:absolute;top:4rem;left:50%;transform:translateX(-50%);line-height:1}
+.pull blockquote{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:400;font-style:italic;color:var(--accent);line-height:1.5;max-width:44rem;margin:3rem auto 2rem;position:relative;z-index:1}
+.pull cite{font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);font-family:var(--mono);text-transform:uppercase}
+
+/* ATTEND */
+.attend{background:var(--near);padding:9rem 4rem;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:10rem;align-items:start}
+.attend-copy h2{font-family:var(--serif);font-size:clamp(2rem,3vw,3rem);font-weight:400;font-style:italic;color:var(--white);line-height:1.1;margin-bottom:2rem}
+.attend-copy p{font-size:0.75rem;font-family:var(--mono);color:var(--mid);line-height:2.3;margin-bottom:1.5rem;letter-spacing:0.03em}
+.attend-note{padding:2rem;border:1px solid var(--border);font-size:0.7rem;font-family:var(--mono);color:var(--dim);line-height:2;margin-top:2rem;letter-spacing:0.05em}
+.attend-note strong{color:var(--accent);font-weight:400}
+.attend-form{display:flex;flex-direction:column;gap:2rem}
+.attend-field{display:flex;flex-direction:column;gap:0.5rem}
+.attend-field label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);font-family:var(--mono)}
+.attend-field input,.attend-field select{background:transparent;border:none;border-bottom:1px solid var(--border);padding:0.75rem 0;font-size:0.82rem;font-family:var(--mono);color:var(--white);outline:none;transition:border-color 0.2s;border-radius:0;appearance:none}
+.attend-field input:focus,.attend-field select:focus{border-color:var(--accent)}
+.attend-field input::placeholder{color:var(--dim)}
+.attend-field select option{background:var(--near)}
+.attend-submit{background:transparent;border:1px solid var(--border);color:var(--accent);padding:1.1rem;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;font-family:var(--mono);transition:all 0.25s;text-align:left;display:flex;align-items:center;justify-content:space-between}
+.attend-submit:hover{border-color:var(--accent);background:rgba(200,184,154,0.05)}
+.attend-submit span{opacity:0.4;font-size:1rem;transition:transform 0.25s}
+.attend-submit:hover span{transform:translateX(4px);opacity:1}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:5rem 4rem 3rem;background:var(--void)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6rem;padding-bottom:4rem;border-bottom:1px solid var(--border);margin-bottom:3rem}
+.footer-name{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--accent);margin-bottom:1rem;letter-spacing:0.05em}
+.footer-blurb{font-size:0.65rem;font-family:var(--mono);color:var(--dim);line-height:2.2;max-width:20rem;letter-spacing:0.05em}
+.footer-col h4{font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm);margin-bottom:1.5rem;font-family:var(--mono)}
+.footer-col a{display:block;font-size:0.7rem;font-family:var(--mono);color:var(--dim);text-decoration:none;margin-bottom:0.7rem;transition:color 0.2s;letter-spacing:0.06em}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.58rem;letter-spacing:0.15em;font-family:var(--mono)}
+.footer-reg{color:var(--dim);text-transform:uppercase}
+.footer-lc{font-family:var(--serif);font-style:italic;color:var(--warm);font-size:0.75rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-mark">The Collective</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#practices">Practices</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#attend" class="nav-gather">Gather</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">Together</div>
+  <div class="hero-coords">51.5°N · 0.1°W · London EC2 · Est. 2014</div>
+  <div class="hero-main">
+    <h1 class="hero-h1">A Community<br><em>in</em> the City</h1>
+    <div class="hero-right">
+      <p class="hero-desc">We gather weekly in East London for teaching, silence, and communion. No performance. No programme. Presence.</p>
+      <a href="#attend" class="hero-gather">Come and gather</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<!-- TIMES -->
+<div class="times">
+  <div class="times-inner">
+    <div class="time-item">
+      <div class="time-num">01 / Primary Gathering</div>
+      <div class="time-day">Sunday</div>
+      <div class="time-clock">10:30 — 12:00</div>
+      <div class="time-location">The Crypt, St Luke's<br>Old Street, EC1V</div>
+    </div>
+    <div class="time-item">
+      <div class="time-num">02 / Evening Contemplation</div>
+      <div class="time-day">Sunday</div>
+      <div class="time-clock">18:30 — 20:00</div>
+      <div class="time-location">Same venue<br>Quieter, less structured</div>
+    </div>
+    <div class="time-item">
+      <div class="time-num">03 / Midweek Study</div>
+      <div class="time-day">Thursday</div>
+      <div class="time-clock">19:30 — 21:00</div>
+      <div class="time-location">Rotating home groups<br>Across E1, N1, EC1</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div>
+    <div class="about-index">/ 001 — What we are</div>
+    <h2>Not a church.<br><em>Not exactly.</em></h2>
+  </div>
+  <div class="about-right">
+    <p>The Collective is a small Christian community in East London. We have no building of our own. No permanent staff. No worship band. We borrow a crypt on Sunday mornings, sit in a circle, and try to take the text seriously.</p>
+    <p>We were started by a group of friends who wanted something slow, honest, and rooted. Ten years later, that is still what we are. About 80 people now. No ambition to be bigger — only deeper.</p>
+    <div class="about-rule"></div>
+    <div class="about-detail">
+      <div class="detail-row"><span class="detail-label">Founded</span><span class="detail-val">2014, Hoxton</span></div>
+      <div class="detail-row"><span class="detail-label">Size</span><span class="detail-val">~80 regular members</span></div>
+      <div class="detail-row"><span class="detail-label">Tradition</span><span class="detail-val">Broadly Anglican / post-evangelical</span></div>
+      <div class="detail-row"><span class="detail-label">Leadership</span><span class="detail-val">Elder-led, no paid staff</span></div>
+      <div class="detail-row"><span class="detail-label">Membership</span><span class="detail-val">Open — by conversation with an elder</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICES -->
+<section class="practices" id="practices">
+  <div class="practices-head">
+    <div class="practices-head-label">/ 002 — How we live</div>
+    <h2>The practices that<br><em>hold us together</em></h2>
+  </div>
+  <div class="practices-list">
+    <div class="practice">
+      <div class="practice-n">001</div>
+      <h3>Gathering</h3>
+      <p>We meet to read, to hear, to break bread, and to pray for one another. The gathering is not a concert or a lecture. It is closer to a meal — unhurried, attentive, mutual.</p>
+    </div>
+    <div class="practice">
+      <div class="practice-n">002</div>
+      <h3>Scripture</h3>
+      <p>We read texts closely, slowly, and together. We do not flatten difficulty or pretend certainty we do not have. We believe the Bible rewards the kind of attention we bring to anything we love.</p>
+    </div>
+    <div class="practice">
+      <div class="practice-n">003</div>
+      <h3>Silence</h3>
+      <p>Each gathering includes ten minutes of silence. Not as a technique, but as acknowledgement: there are things that cannot be said, only received. We have found this changes everything.</p>
+    </div>
+    <div class="practice">
+      <div class="practice-n">004</div>
+      <h3>Table</h3>
+      <p>Communion is at the centre of Sunday gatherings — bread and wine passed between people sitting in a circle. It is the oldest thing we do, and the most important.</p>
+    </div>
+    <div class="practice">
+      <div class="practice-n">005</div>
+      <h3>Presence in the City</h3>
+      <p>Members work in finance, teaching, the arts, law, and medicine. We believe Christian life is mostly invisible, mostly ordinary — lived in those places, not only here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section class="teaching" id="teaching">
+  <div>
+    <div class="teaching-meta">/ 003 — Recent teaching</div>
+    <h2>The God Who<br>Stays Silent</h2>
+    <div class="teaching-series">Series: Lament — Part 3 of 4</div>
+    <p>Thomas spoke on the psalms of disorientation — those prayers in which the speaker cannot locate God, cannot make sense of their own suffering, and refuses the comfort of easy resolution. He argued these are not failures of faith. They are faith.</p>
+    <div class="teacher-line">
+      <div class="teacher-init">T</div>
+      <div>
+        <div class="teacher-n">Thomas Hartley</div>
+        <div class="teacher-r">Elder / teacher</div>
+      </div>
+    </div>
+    <a href="#" class="listen-link">Listen to recording →</a>
+  </div>
+  <div class="teaching-visual">
+    <img src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Teaching">
+    <div class="teaching-visual-foot">
+      <div class="teaching-stamp">20 March 2026</div>
+      <div class="teaching-title-sm">The God Who Stays Silent</div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<section class="pull">
+  <blockquote>"To worship is to attend to the reality of something other than yourself. This is why worship is the antidote to both anxiety and pride."</blockquote>
+  <cite>— From a Collective teaching, Lent 2025</cite>
+</section>
+
+<!-- ATTEND -->
+<section class="attend" id="attend">
+  <div class="attend-copy">
+    <h2>Come to a<br><em>gathering</em></h2>
+    <p>You do not need to believe anything in particular to come. You need only be willing to sit still for ninety minutes, to listen, and to take the question seriously.</p>
+    <p>Sundays at The Crypt are the easiest first step. Arrive whenever. Sit where you like. You will not be singled out. After the gathering there is coffee, and you can stay or leave.</p>
+    <div class="attend-note">
+      <strong>No collection is taken.</strong><br>
+      We do not pass a plate or make requests. Members give privately, if and when they choose to. First-time visitors should not give anything.
+    </div>
+  </div>
+  <div class="attend-form">
+    <p style="font-size:0.68rem;font-family:var(--mono);color:var(--dim);letter-spacing:0.08em;line-height:2;margin-bottom:0.5rem">If you would like someone to be in touch before you come — or if you have questions — leave your details below. There is no list, no follow-up sequence. Just a reply from a person.</p>
+    <div class="attend-field"><label>Your name</label><input type="text" id="fName" id="fEmail" placeholder="—"></div>
+    <div class="attend-field"><label>Email</label><input type="email" placeholder="—"></div>
+    <div class="attend-field"><label>Which gathering are you thinking of attending?</label>
+      <select>
+        <option value="">—</option>
+        <option>Sunday Morning (10:30)</option>
+        <option>Sunday Evening (18:30)</option>
+        <option>Thursday Midweek Study</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="attend-field"><label>Anything you'd like to ask (optional)</label><input type="text" placeholder="—"></div>
+    <button class="attend-submit" id="fBtn" onclick="submitEnq()">
+      Send message <span>→</span>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-name">The Collective</div>
+      <p class="footer-blurb">A small Christian community in East London. We gather on Sundays in a crypt, read old texts, sit in silence, and try to love our neighbours. That's all.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <a href="#">What we believe</a>
+      <a href="#">Our history</a>
+      <a href="#">Leadership</a>
+      <a href="#">Membership</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="#">St Luke's Crypt, Old Street EC1V</a>
+      <a href="#">hello@collective.london</a>
+      <a href="#">Recordings archive</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-reg">The Collective · London EC1 · Reg. Charity No. 1183721</span>
+    <span class="footer-lc">Est. 2014</span>
+  </div>
+</footer>
+
+<script>
+async function submitEnq(){
+  var n=document.getElementById('fName')?.value.trim()||'',e=document.getElementById('fEmail')?.value.trim()||'',p=document.getElementById('fPhone')?.value.trim()||'';
+  if(!n){showSt('Please enter your name.','#8b0000','#fff0ee');return;}
+  var btn=document.getElementById('fBtn');btn.disabled=true;
+  try{var res=await fetch('/api/enquire',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:n,email:e,phone:p,siteName:'The Collective',whatsappNumber:''})
+  });
+  var d=res.ok?await res.json():{success:true,whatsappUrl:'https://wa.me/'};
+  showSt('Thank you. We\'ll be in touch shortly to confirm.','#1a3a1a','#f0f8f0');
+  btn.textContent='Sent ✓';}
+  catch{btn.disabled=false;showSt('Something went wrong. Please contact us directly.','#8b0000','#fff0ee');}
+}
+function showSt(m,c,bg){var e=document.getElementById('fStatus');e.textContent=m;e.style.cssText='display:block;background:'+bg+';color:'+c+';border:1px solid '+c+';padding:.85rem 1rem;font-size:.82rem;margin-top:.75rem';}
+</script>
+</body>
+</html>
